@@ -3,7 +3,7 @@
         <ul class="list-unstyled">
             <li>
                 <button class="btn btn-outline-secondary w-100">
-                    <a class="text-decoration-none" href="">Projects</a>
+                    <a class="text-decoration-none" href="{{route('admin.project.index')}}">Projects</a>
                 </button>
             </li>
             <li>
