@@ -13,7 +13,7 @@
 
     <div class="main-wrapper overflow-hidden d-flex">
         @include('admin.partials.aside')
-        <div class="overflow-x-scroll w-100">
+        <div class="overflow-x-auto w-100">
             @yield('content')
         </div>
     </div>
