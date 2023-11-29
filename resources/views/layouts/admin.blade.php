@@ -11,9 +11,11 @@
 <body >
     @include('admin.partials.header')
 
-    <div class="main-wrapper d-flex">
+    <div class="main-wrapper overflow-hidden d-flex">
         @include('admin.partials.aside')
-        @yield('content')
+        <div class="overflow-x-scroll w-100">
+            @yield('content')
+        </div>
     </div>
 </body>
 </html>
