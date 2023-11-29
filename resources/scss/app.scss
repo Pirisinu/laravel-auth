@@ -1,2 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
-@import './partials/guest_header'
+@import './general';
+@import './main-wrapper';
+@import './partials/guest/guest_header';
+@import './partials/admin/admin_header';
+@import './partials/admin/admin_aside';

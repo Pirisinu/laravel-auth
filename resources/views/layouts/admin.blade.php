@@ -8,8 +8,12 @@
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
 </head>
-<body>
+<body >
     @include('admin.partials.header')
-    @yield('content')
+
+    <div class="main-wrapper d-flex">
+        @include('admin.partials.aside')
+        @yield('content')
+    </div>
 </body>
 </html>
