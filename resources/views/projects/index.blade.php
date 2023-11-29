@@ -12,7 +12,7 @@
         <div class="card-body">
           <h5 class="card-title"><strong>Project title:</strong> {{ $project->title }}</h5>
           <p class="card-text"><strong>Project description:</strong> {{ $project->description }}</p>
-          <a href="#" class="btn btn-primary">More info</a>
+          <a href="{{route('project.show')}}" class="btn btn-primary">More info</a>
         </div>
         <div class="card-footer text-muted">
             <strong>Project start date:</strong> {{ $project->start_date }}

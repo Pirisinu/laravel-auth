@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::paginate(10);
-        return view('admin.projects', compact('projects'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -36,9 +36,11 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        $nextComic = Project::where('id', '>', $project->id)->first();
+        $prevComic = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        return view('projects.show', compact('project', 'nextComic', 'prevComic'));
     }
 
     /**
