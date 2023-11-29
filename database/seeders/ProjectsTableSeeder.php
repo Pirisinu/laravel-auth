@@ -19,7 +19,7 @@ class ProjectsTableSeeder extends Seeder
         for($i = 0; $i < 50; $i++) {
             $new_project = new Project();
             $new_project->title = $faker->name();
-            $new_project->description = $faker->name();
+            $new_project->description = $faker->text();
             $new_project->start_date = $faker->date('Y_m_d');
             $new_project->save();
         }

@@ -2,8 +2,26 @@
 
 @section('content')
 <div>
+    <nav>
+        <ul>
+            <li>
+                <a href="">Add New Project</a>
+            </li>
+        </ul>
+    </nav>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <h1>Projects:</h1>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <h1>Projects: <a href=""></a></h1>
     @foreach ($projects as $project)
     <div class="card text-center">
         <div class="card-header">

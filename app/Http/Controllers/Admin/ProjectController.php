@@ -38,9 +38,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $nextComic = Project::where('id', '>', $project->id)->first();
-        $prevComic = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
-        return view('projects.show', compact('project', 'nextComic', 'prevComic'));
+        $nextProject = Project::where('id', '>', $project->id)->first();
+        $prevProject = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        return view('admin.projects.show', compact('project', 'nextProject', 'prevProject'));
     }
 
     /**
@@ -62,8 +62,15 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+
+        if (!$project) {
+            return redirect()->route('admin.project.index')->with('error', 'Project not found.');
+        }
+
+        $project->delete();
+
+        return redirect()->route('admin.project.index')->with('success', 'Project successfully deleted.');
     }
 }
