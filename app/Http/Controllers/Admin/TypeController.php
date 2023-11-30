@@ -38,9 +38,9 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        $nextType = Type::where('id', '>', $type->id)->first();
-        $prevType = Type::where('id', '<', $type->id)->orderBy('id', 'desc')->first();
-        return view('admin.type.show', compact('type', 'nextType', 'prevType'));
+        $next = Type::where('id', '>', $type->id)->first();
+        $prev = Type::where('id', '<', $type->id)->orderBy('id', 'desc')->first();
+        return view('admin.type.show', compact('type', 'next', 'prev'));
     }
 
     /**

@@ -7,7 +7,7 @@
                 <strong>Project n°:{{$project->id}}</strong>
                 <form action="" method="post" onsubmit="return confirm('Are you sure you want to delete this project?')">
                     <button class="btn btn-warning">
-                        <a class="nav-link" href="">Edit Project</a>
+                        <a class="nav-link btn btn-warning" href="{{route('admin.project.edit', $project->id)}}">Edit Project</a>
                     </button>
                     @csrf
                     @method('DELETE')

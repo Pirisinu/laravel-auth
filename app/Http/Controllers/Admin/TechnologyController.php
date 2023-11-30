@@ -32,11 +32,11 @@ class TechnologyController extends Controller
     {
         $form_data = $request->all();
 
-        $new_project = new Technology();
-        $new_project->fill($form_data);
-        $new_project->save();
+        $new_technologies = new Technology();
+        $new_technologies->fill($form_data);
+        $new_technologies->save();
 
-        return redirect()->route('admin.project.show', $new_project->id);
+        return redirect()->route('admin.technology.show', $new_technologies->id);
     }
 
     /**
@@ -44,9 +44,9 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        $nextTechnology = Technology::where('id', '>', $technology->id)->first();
-        $prevTechnology = Technology::where('id', '<', $technology->id)->orderBy('id', 'desc')->first();
-        return view('admin.technologies.show', compact('technology', 'nextTechnology', 'prevTechnology'));
+        $next = Technology::where('id', '>', $technology->id)->first();
+        $prev = Technology::where('id', '<', $technology->id)->orderBy('id', 'desc')->first();
+        return view('admin.technologies.show', compact('technology', 'next', 'prev'));
     }
 
     /**
@@ -68,8 +68,15 @@ class TechnologyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Technology $technology)
     {
-        //
+
+        if (!$technology) {
+            return redirect()->route('admin.technology.index')->with('error', 'Technology not found.');
+        }
+
+        $technology->delete();
+
+        return redirect()->route('admin.technology.index')->with('success', 'Technology successfully deleted.');
     }
 }

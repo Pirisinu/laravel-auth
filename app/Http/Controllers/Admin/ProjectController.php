@@ -44,17 +44,23 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $nextProject = Project::where('id', '>', $project->id)->first();
-        $prevProject = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
-        return view('admin.projects.show', compact('project', 'nextProject', 'prevProject'));
+        $next = Project::where('id', '>', $project->id)->first();
+        $prev = Project::where('id', '<', $project->id)->orderBy('id', 'desc')->first();
+        return view('admin.projects.show', compact('project', 'next', 'prev'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $project = Project::find($id);
+
+        if (!$project) {
+            return redirect()->route('index')->with('error', 'Project not found.');
+        }
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
