@@ -54,27 +54,51 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::find($id);
+        $projectToEdit = Project::find($id);
 
-        if (!$project) {
+        if (!$projectToEdit) {
             return redirect()->route('index')->with('error', 'Project not found.');
         }
 
-        return view('admin.projects.show', compact('project'));
+        return view('admin.projects.edit', compact('projectToEdit'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validazione dei dati del modulo
+        $request->validate([
+            'title' => 'required',
+            'start_date' => 'required',
+            'description' => 'required'
+        ]);
 
+        $project = Project::find($id);
+
+        if (!$project) {
+            return redirect()->route('admin.project.index')->with('error', 'Project not found.');
+        }
+
+        $project->update([
+            'title' => $request->input('title'),
+            'start_date' => $request->input('start_date'),
+            'description' => $request->input('description')
+        ]);
+
+        $project->save();
+
+        return redirect()->route('admin.project.show', ['project' => $project->id])->with('success', 'Project aggiornato con successo.');
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($project)
     {
 
         if (!$project) {
@@ -86,3 +110,5 @@ class ProjectController extends Controller
         return redirect()->route('admin.project.index')->with('success', 'Project successfully deleted.');
     }
 }
+
+

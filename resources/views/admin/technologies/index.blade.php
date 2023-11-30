@@ -2,13 +2,6 @@
 
 @section('content')
 <div>
-    <nav>
-        <ul>
-            <li>
-                <a href="{{route('admin.technology.create')}}">Add New Technology</a>
-            </li>
-        </ul>
-    </nav>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

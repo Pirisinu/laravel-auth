@@ -1,14 +1,7 @@
 @extends('admin.home')
 
 @section('content')
-<div>
-    <nav>
-        <ul>
-            <li>
-                <a href="{{route('admin.type.index')}}">Add New Type</a>
-            </li>
-        </ul>
-    </nav>
+<div></div>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
