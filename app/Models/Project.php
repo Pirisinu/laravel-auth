@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    use HasFactory;
+    /* protected $fillable = [
+        'title',
+        'start_date',
+        'description',
+    ]; */
+    protected $guarded = ['id'];
 }

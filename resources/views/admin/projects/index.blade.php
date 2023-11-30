@@ -5,7 +5,7 @@
     <nav>
         <ul>
             <li>
-                <a href="">Add New Project</a>
+                <a href="{{route('admin.project.create')}}">Add New Project</a>
             </li>
         </ul>
     </nav>
