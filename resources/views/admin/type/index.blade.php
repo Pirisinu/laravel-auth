@@ -25,11 +25,11 @@
     @foreach ($types as $type)
     <div class="card text-center">
         <div class="card-header">
-          <h4><strong>type n°:</strong> {{ $type->id }}</h4>
+          <h4><strong>Type n°:</strong> {{ $type->id }}</h4>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><strong>type:</strong> {{ $type->name }}</h5>
-          <p class="card-text"><strong>type description:</strong> {{ $type->description }}</p>
+          <h5 class="card-title"><strong>Type:</strong> {{ $type->name }}</h5>
+          <p class="card-text"><strong>Type description:</strong> {{ $type->description }}</p>
           <a href="{{route('admin.type.show', $type)}}" class="btn btn-primary">More info</a>
         </div>
         <div class="card-footer text-muted">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
@@ -12,7 +13,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::paginate(10);
+        return view('admin.type.index', compact('types'));
     }
 
     /**
@@ -34,9 +36,11 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Type $type)
     {
-        //
+        $nextType = Type::where('id', '>', $type->id)->first();
+        $prevType = Type::where('id', '<', $type->id)->orderBy('id', 'desc')->first();
+        return view('admin.type.show', compact('type', 'nextType', 'prevType'));
     }
 
     /**
