@@ -16,7 +16,7 @@
 
     <h1>Types: <a href=""></a></h1>
     @foreach ($types as $type)
-    <div class="card text-center">
+    <div class="card w-75 my-5 m-auto text-center box my-shadow">
         <div class="card-header">
           <h4><strong>Type n°:</strong> {{ $type->id }}</h4>
         </div>

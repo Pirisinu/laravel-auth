@@ -16,7 +16,7 @@
 
     <h1>Technologies: <a href=""></a></h1>
     @foreach ($technologies as $technology)
-    <div class="card text-center">
+    <div class="card w-75 my-5 m-auto text-center box my-shadow">
         <div class="card-header">
           <h4><strong>technology n°:</strong> {{ $technology->id }}</h4>
         </div>
