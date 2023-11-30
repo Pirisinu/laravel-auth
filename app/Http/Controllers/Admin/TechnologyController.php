@@ -32,11 +32,11 @@ class TechnologyController extends Controller
     {
         $form_data = $request->all();
 
-        $new_technologies = new Technology();
-        $new_technologies->fill($form_data);
-        $new_technologies->save();
+        $new_technology = new Technology();
+        $new_technology->fill($form_data);
+        $new_technology->save();
 
-        return redirect()->route('admin.technology.show', $new_technologies->id);
+        return redirect()->route('admin.technology.show', $new_technology->id);
     }
 
     /**
@@ -52,31 +52,62 @@ class TechnologyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $technologyToEdit = Technology::find($id);
+
+        if (!$technologyToEdit) {
+            return redirect()
+                ->route('admin.technology.index')
+                ->with('error', 'Technology not found.');
+        }
+
+        return view('admin.technologies.edit', compact('technologyToEdit'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validazione dei dati del modulo
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
 
+        $technologyToUpdate = Technology::find($id);
+
+        if (!$technologyToUpdate) {
+            return redirect()
+                ->route('admin.technology.index')
+                ->with('error', 'Technology not found.');
+        }
+
+        $technologyToUpdate->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
+
+        $technologyToUpdate->save();
+
+        return redirect()
+            ->route('admin.technology.show', ['technology' => $technologyToUpdate->id])
+            ->with('success', 'Project aggiornato con successo.');
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Technology $technology)
     {
-
         if (!$technology) {
             return redirect()->route('admin.technology.index')->with('error', 'Technology not found.');
         }
-
         $technology->delete();
-
         return redirect()->route('admin.technology.index')->with('success', 'Technology successfully deleted.');
     }
 }

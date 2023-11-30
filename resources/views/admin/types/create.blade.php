@@ -1,8 +1,8 @@
 @extends('admin.home')
 
 @section('content')
-<h1>Add your new technology:</h1>
-<form action="{{route('admin.technology.store')}}" method="POST" class="row g-3 p-3">
+<h1>Generate your new type:</h1>
+<form action="{{route('admin.type.store')}}" method="POST" class="row g-3 p-3">
     @csrf
     {{-- NAME --}}
     <div class="col-md-6">
@@ -17,7 +17,7 @@
     {{-- BTN --}}
     <div class="col-12">
         <button type="reset" class="btn btn-warning">Annulla</button>
-        <button type="submit" class="btn btn-primary">Save new project</button>
+        <button type="submit" class="btn btn-primary">Save new type</button>
     </div>
   </form>
 

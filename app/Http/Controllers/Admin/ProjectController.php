@@ -57,7 +57,9 @@ class ProjectController extends Controller
         $projectToEdit = Project::find($id);
 
         if (!$projectToEdit) {
-            return redirect()->route('index')->with('error', 'Project not found.');
+            return redirect()
+                ->route('admin.project.index')
+                ->with('error', 'Project not found.');
         }
 
         return view('admin.projects.edit', compact('projectToEdit'));
@@ -82,7 +84,9 @@ class ProjectController extends Controller
         $project = Project::find($id);
 
         if (!$project) {
-            return redirect()->route('admin.project.index')->with('error', 'Project not found.');
+            return redirect()
+                ->route('admin.project.index')
+                ->with('error', 'Project not found.');
         }
 
         $project->update([
@@ -93,20 +97,19 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('admin.project.show', ['project' => $project->id])->with('success', 'Project aggiornato con successo.');
+        return redirect()
+            ->route('admin.project.show', ['project' => $project->id])
+            ->with('success', 'Project aggiornato con successo.');
     }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($project)
+    public function destroy(Project $project)
     {
-
         if (!$project) {
             return redirect()->route('admin.project.index')->with('error', 'Project not found.');
         }
-
         $project->delete();
-
         return redirect()->route('admin.project.index')->with('success', 'Project successfully deleted.');
     }
 }

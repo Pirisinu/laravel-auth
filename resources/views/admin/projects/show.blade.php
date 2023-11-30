@@ -5,7 +5,7 @@
         <div class="h-100 ">
             <h1 class="d-flex justify-content-evenly my-2">
                 <strong>Project n°:{{$project->id}}</strong>
-                <form action="" method="post" onsubmit="return confirm('Are you sure you want to delete this project?')">
+                <form action={{route('admin.project.destroy', $project)}} method="post" onsubmit="return confirm('Are you sure you want to delete this project?')">
                     <button class="btn btn-warning">
                         <a class="nav-link btn btn-warning" href="{{route('admin.project.edit', $project->id)}}">Edit Project</a>
                     </button>

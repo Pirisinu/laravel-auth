@@ -14,7 +14,7 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::paginate(10);
-        return view('admin.type.index', compact('types'));
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.types.create');
     }
 
     /**
@@ -30,7 +30,13 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+
+        $new_type = new Type();
+        $new_type->fill($form_data);
+        $new_type->save();
+
+        return redirect()->route('admin.types.show', $new_type->id);
     }
 
     /**
@@ -40,30 +46,68 @@ class TypeController extends Controller
     {
         $next = Type::where('id', '>', $type->id)->first();
         $prev = Type::where('id', '<', $type->id)->orderBy('id', 'desc')->first();
-        return view('admin.type.show', compact('type', 'next', 'prev'));
+        return view('admin.types.show', compact('type', 'next', 'prev'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $typeToEdit = Type::find($id);
+
+        if (!$typeToEdit) {
+            return redirect()
+                ->route('admin.type.index')
+                ->with('error', 'Type not found.');
+        }
+
+        return view('admin.types.edit', compact('typeToEdit'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validazione dei dati del modulo
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
 
+        $typeToUpdate = Type::find($id);
+
+        if (!$typeToUpdate) {
+            return redirect()
+                ->route('admin.type.index')
+                ->with('error', 'Type not found.');
+        }
+
+        $typeToUpdate->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
+
+        $typeToUpdate->save();
+
+        return redirect()
+            ->route('admin.type.show', ['type' => $typeToUpdate->id])
+            ->with('success', 'Project aggiornato con successo.');
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Type $type)
     {
-        //
+        if (!$type) {
+            return redirect()->route('admin.type.index')->with('error', 'Type not found.');
+        }
+        $type->delete();
+        return redirect()->route('admin.type.index')->with('success', 'Type successfully deleted.');
     }
 }
