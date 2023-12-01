@@ -11,6 +11,6 @@ class Project extends Model
     protected $guarded = ['id'];
 
     public function technologies(){
-        return $this->hasMany(Technology::class);
+        return $this->belongsTo(Technology::class);
     }
 }

@@ -19,7 +19,7 @@ class FakerProjectsTableSeeder extends Seeder
             $new_project = new Project();
             $new_project->technology_id = Technology::inRandomOrder()->first()->id;
             $new_project->title = $faker->sentence();
-            $new_project->description = $faker->paragraph();
+            $new_project->description = $faker->text();
             $new_project->start_date = $faker->date();
             $new_project->save();
         }

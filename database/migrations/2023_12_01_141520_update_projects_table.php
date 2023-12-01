@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('projects', function(Blueprint $table){
             $table->unsignedBigInteger('technology_id')->after('id')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::table('projects', function(Blueprint $table){
             $table->dropForeign(['technology_id']);
