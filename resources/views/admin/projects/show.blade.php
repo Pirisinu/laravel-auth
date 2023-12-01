@@ -7,12 +7,12 @@
                 <strong>Project n°:{{$project->id}}</strong>
                 <form action={{route('admin.project.destroy', $project)}} method="post" onsubmit="return confirm('Are you sure you want to delete this project?')">
                     <button class="btn btn-warning">
-                        <a class="nav-link btn btn-warning" href="{{route('admin.project.edit', $project->id)}}">Edit Project</a>
+                        <a class="nav-link btn btn-warning" href="{{route('admin.project.edit', $project->id)}}"><i class="fa-sharp fa-solid fa-pen fa-bounce"></i></a>
                     </button>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        Delete Project
+                        <i class="fa-solid fa-trash fa-bounce"></i>
                     </button>
                 </form>
             </h1>

@@ -3,7 +3,7 @@
         <ul class="list-unstyled">
             <li>
                 <div class="dropdown">
-                    <button class="btn btn-outline-secondary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn text-white btn-outline-secondary w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Projects
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
